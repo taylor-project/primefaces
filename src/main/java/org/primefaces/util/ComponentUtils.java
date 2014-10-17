@@ -18,22 +18,60 @@ package org.primefaces.util;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 import javax.el.ValueExpression;
 import javax.faces.FacesException;
-import javax.faces.component.*;
+import javax.faces.component.EditableValueHolder;
+import javax.faces.component.NamingContainer;
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIForm;
+import javax.faces.component.UIInput;
+import javax.faces.component.UIParameter;
+import javax.faces.component.UISelectItem;
+import javax.faces.component.UISelectItems;
+import javax.faces.component.UniqueIdVendor;
+import javax.faces.component.ValueHolder;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.model.SelectItem;
 import javax.faces.validator.BeanValidator;
+
 import org.primefaces.component.api.RTLAware;
 import org.primefaces.component.api.Widget;
 
 public class ComponentUtils {
+	
+	public static Map<String, List<String>> getUIParams(UIComponent component) {
+        List<UIComponent> children = component.getChildren();
+        Map<String, List<String>> params = null;
+
+        if(children != null && children.size() > 0) {
+            params = new LinkedHashMap<String, List<String>>();
+
+            for(UIComponent child : children) {
+                if(child.isRendered() && (child instanceof UIParameter)) {
+                    UIParameter uiParam = (UIParameter) child;
+
+                    if(!uiParam.isDisable()) {
+                        List<String> paramValues = params.get(uiParam.getName());
+                        if(paramValues == null) {
+                            paramValues = new ArrayList<String>();
+                            params.put(uiParam.getName(), paramValues);
+                        }
+
+                        paramValues.add(String.valueOf(uiParam.getValue()));
+                    }
+                }
+            }
+        }
+
+        return params;
+    }
 
 	/**
 	 * Algorithm works as follows;
