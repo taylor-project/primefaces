@@ -15,22 +15,29 @@
  */
 package org.primefaces.model.menu;
 
-import javax.faces.component.UIComponent;
-import org.primefaces.component.submenu.UISubmenu;
+import java.util.List;
+
+import org.primefaces.component.menuitem.MenuItem;
+import org.primefaces.component.submenu.Submenu;
 
 
-/**
- * Default implementation of a MenuModel optimized for static menus that do not change once built.
- */
-public class DefaultMenuModel extends org.primefaces.model.DefaultMenuModel {
+public class DefaultMenuModel extends org.primefaces.model.DefaultMenuModel implements MenuModel {
 
-    private boolean generated = false;
-    
-    @Override
-    public void generateUniqueIds() {
-        if(!generated) {
-            super.generateUniqueIds();
-            generated = true;
-        }
-    }
+   private static final long serialVersionUID = 1L;
+   
+   public void addElement(MenuElement element) {
+	   if(element instanceof Submenu) {
+		   super.addSubmenu((Submenu) element);
+	   } else if(element instanceof MenuItem) {
+		   super.addMenuItem((MenuItem) element);
+	   }
+   }
+   
+   public List<MenuElement> getElements() {
+	   throw new UnsupportedOperationException();
+   }
+   
+   public void generateUniqueIds() {
+	   throw new UnsupportedOperationException();
+   }
 }

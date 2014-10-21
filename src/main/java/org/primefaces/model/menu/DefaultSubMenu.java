@@ -15,94 +15,17 @@
  */
 package org.primefaces.model.menu;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
-public class DefaultSubMenu implements Submenu, Serializable {
-    
-    private String id;
-    private String style;
-    private String styleClass;
-    private String icon;
-    private String label;
-    private List<MenuElement> elements;
-    private boolean rendered = true;
-    
-    public DefaultSubMenu() {
-        elements = new ArrayList<MenuElement>();
-    }
-    
-    public DefaultSubMenu(String label) {
-        this.label = label;
-        elements = new ArrayList<MenuElement>();
-    }
-    
-    public DefaultSubMenu(String label, String icon) {
-        this.label = label;
-        this.icon = icon;
-        elements = new ArrayList<MenuElement>();
-    }
-
-    public String getId() {
-        return id;
-    }
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getStyle() {
-        return style;
-    }
-    public void setStyle(String style) {
-        this.style = style;
-    }
-
-    public String getStyleClass() {
-        return styleClass;
-    }
-    public void setStyleClass(String styleClass) {
-        this.styleClass = styleClass;
-    }
-
-    public String getIcon() {
-        return icon;
-    }
-    public void setIcon(String icon) {
-        this.icon = icon;
-    }
-
-    public String getLabel() {
-        return label;
-    }
-    public void setLabel(String label) {
-        this.label = label;
-    }
-
-    public List<MenuElement> getElements() {
-        return elements;
-    }
-
-    public void setElements(List<MenuElement> elements) {
-        this.elements = elements;
-    } 
-    
-    public int getElementsCount() {
-        return (elements == null) ? 0 : elements.size();
-    }
-    
-    public boolean isRendered() {
-        return rendered;
-    }
-    public void setRendered(boolean rendered) {
-        this.rendered = rendered;
-    }
-
-    public Object getParent() {
-        return null;
-    }
-    
-    public void addElement(MenuElement element) {
-        elements.add(element);
-    }
+public class DefaultSubMenu extends org.primefaces.component.submenu.Submenu implements Submenu {
+	
+	private static final long serialVersionUID = 1L;
+	
+	public List getElements() {
+		return super.getChildren();
+	}
+	
+	public int getElementsCount() {
+		throw new UnsupportedOperationException();
+	}
 }
