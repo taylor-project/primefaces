@@ -16,33 +16,14 @@
 package org.primefaces.model.menu;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
-public class DefaultSubMenu implements Submenu, Serializable {
+public class DefaultSeparator implements Separator, Serializable {
     
     private String id;
+    private String title;
     private String style;
     private String styleClass;
-    private String icon;
-    private String label;
-    private List<MenuElement> elements;
     private boolean rendered = true;
-    
-    public DefaultSubMenu() {
-        elements = new ArrayList<MenuElement>();
-    }
-    
-    public DefaultSubMenu(String label) {
-        this.label = label;
-        elements = new ArrayList<MenuElement>();
-    }
-    
-    public DefaultSubMenu(String label, String icon) {
-        this.label = label;
-        this.icon = icon;
-        elements = new ArrayList<MenuElement>();
-    }
 
     public String getId() {
         return id;
@@ -51,6 +32,13 @@ public class DefaultSubMenu implements Submenu, Serializable {
         this.id = id;
     }
 
+    public String getTitle() {
+        return title;
+    }
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    
     public String getStyle() {
         return style;
     }
@@ -64,45 +52,12 @@ public class DefaultSubMenu implements Submenu, Serializable {
     public void setStyleClass(String styleClass) {
         this.styleClass = styleClass;
     }
-
-    public String getIcon() {
-        return icon;
-    }
-    public void setIcon(String icon) {
-        this.icon = icon;
-    }
-
-    public String getLabel() {
-        return label;
-    }
-    public void setLabel(String label) {
-        this.label = label;
-    }
-
-    public List<MenuElement> getElements() {
-        return elements;
-    }
-
-    public void setElements(List<MenuElement> elements) {
-        this.elements = elements;
-    } 
-    
-    public int getElementsCount() {
-        return (elements == null) ? 0 : elements.size();
-    }
     
     public boolean isRendered() {
         return rendered;
     }
+
     public void setRendered(boolean rendered) {
         this.rendered = rendered;
-    }
-
-    public Object getParent() {
-        return null;
-    }
-    
-    public void addElement(MenuElement element) {
-        elements.add(element);
     }
 }

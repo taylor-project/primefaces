@@ -15,22 +15,11 @@
  */
 package org.primefaces.model.menu;
 
-import javax.faces.component.UIComponent;
-import org.primefaces.component.submenu.UISubmenu;
+import java.util.List;
 
-
-/**
- * Default implementation of a MenuModel optimized for static menus that do not change once built.
- */
-public class DefaultMenuModel extends org.primefaces.model.DefaultMenuModel {
-
-    private boolean generated = false;
+public interface MenuColumn extends MenuGroup {
     
-    @Override
-    public void generateUniqueIds() {
-        if(!generated) {
-            super.generateUniqueIds();
-            generated = true;
-        }
-    }
+    public String getStyle();
+    
+    public String getStyleClass();
 }

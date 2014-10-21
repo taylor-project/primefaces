@@ -1,5 +1,5 @@
 /*
- * Copyright 2009-2012 PrimeTek.
+ * Copyright 2009-2014 PrimeTek.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,42 +15,28 @@
  */
 package org.primefaces.model.menu;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DefaultSubMenu implements Submenu, Serializable {
+public class DefaultMenuColumn implements MenuColumn {
     
     private String id;
     private String style;
     private String styleClass;
-    private String icon;
-    private String label;
     private List<MenuElement> elements;
     private boolean rendered = true;
     
-    public DefaultSubMenu() {
+    public DefaultMenuColumn() {
         elements = new ArrayList<MenuElement>();
     }
     
-    public DefaultSubMenu(String label) {
-        this.label = label;
-        elements = new ArrayList<MenuElement>();
-    }
-    
-    public DefaultSubMenu(String label, String icon) {
-        this.label = label;
-        this.icon = icon;
-        elements = new ArrayList<MenuElement>();
-    }
-
     public String getId() {
         return id;
     }
     public void setId(String id) {
         this.id = id;
     }
-
+    
     public String getStyle() {
         return style;
     }
@@ -64,19 +50,12 @@ public class DefaultSubMenu implements Submenu, Serializable {
     public void setStyleClass(String styleClass) {
         this.styleClass = styleClass;
     }
-
-    public String getIcon() {
-        return icon;
+    
+    public boolean isRendered() {
+        return rendered;
     }
-    public void setIcon(String icon) {
-        this.icon = icon;
-    }
-
-    public String getLabel() {
-        return label;
-    }
-    public void setLabel(String label) {
-        this.label = label;
+    public void setRendered(boolean rendered) {
+        this.rendered = rendered;
     }
 
     public List<MenuElement> getElements() {
@@ -89,17 +68,6 @@ public class DefaultSubMenu implements Submenu, Serializable {
     
     public int getElementsCount() {
         return (elements == null) ? 0 : elements.size();
-    }
-    
-    public boolean isRendered() {
-        return rendered;
-    }
-    public void setRendered(boolean rendered) {
-        this.rendered = rendered;
-    }
-
-    public Object getParent() {
-        return null;
     }
     
     public void addElement(MenuElement element) {
