@@ -24,23 +24,16 @@ import javax.faces.component.UIComponent;
 import org.primefaces.component.menuitem.MenuItem;
 import org.primefaces.component.separator.Separator;
 import org.primefaces.component.submenu.Submenu;
-import org.primefaces.component.submenu.UISubmenu;
-import org.primefaces.model.menu.MenuElement;
-import org.primefaces.model.menu.MenuGroup;
 
-public class DefaultMenuModel implements org.primefaces.model.MenuModel, Serializable {
+public class DefaultMenuModel implements MenuModel, Serializable {
 
-    protected List<UIComponent> contents;
+    private List<UIComponent> contents;
 
     public DefaultMenuModel() {
         contents = new ArrayList<UIComponent>();
     }
 
     public void addSubmenu(Submenu submenu) {
-        contents.add(submenu);
-    }
-    
-    public void addSubmenu(UISubmenu submenu) {
         contents.add(submenu);
     }
 
@@ -55,43 +48,4 @@ public class DefaultMenuModel implements org.primefaces.model.MenuModel, Seriali
     public List<UIComponent> getContents() {
         return contents;
     }
-
-	public List<MenuElement> getElements() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void addElement(MenuElement element) {
-		contents.add((UIComponent) element);
-	}
-	
-	public void addUISubmenu(UISubmenu element) {
-		contents.add(element);
-	}
-
-	public void generateUniqueIds() {
-		if(!generated) {
-			generateUniqueIds(getElements(), "_");
-			generated = true;
-		}
-	}
-	
-	private boolean generated = false;
-
-	private void generateUniqueIds(List<MenuElement> elements, String seed) {
-		if(elements == null || elements.isEmpty()) {
-			return;
-		}
-		
-		int counter = 0;
-		
-		for(MenuElement element : elements) {
-			String id = (seed == null) ? String.valueOf(counter++) : seed + "_" + counter++;
-			element.setId(id);
-			
-			if(element instanceof MenuGroup) {
-				generateUniqueIds(((MenuGroup) element).getElements(), id);
-			}
-		}
-	}
 }
