@@ -1,3 +1,5 @@
+var PF = function(widgetVar) { return window[widgetVar]; };
+
 (function(window) {
     
     if(window.PrimeFaces) {
