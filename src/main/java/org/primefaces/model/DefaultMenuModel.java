@@ -18,6 +18,7 @@ package org.primefaces.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.faces.component.UIComponent;
 
 import org.primefaces.component.menuitem.MenuItem;
