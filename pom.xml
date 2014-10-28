@@ -6,7 +6,7 @@
     <groupId>org.primefaces</groupId>
     <artifactId>primefaces</artifactId>
     <packaging>jar</packaging>
-    <version>3.5</version>
+    <version>TRUNK-SNAPSHOT</version>
     <name>primefaces</name>
     <url>http://www.primefaces.org</url>
     
@@ -21,6 +21,7 @@
     
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <wagon.ssh.version>1.0-beta-2</wagon.ssh.version>
     </properties>
 	
     <dependencies>
@@ -344,7 +345,7 @@
             <extension>
                 <groupId>org.apache.maven.wagon</groupId>
                 <artifactId>wagon-ssh</artifactId>
-                <version>1.0</version>
+                <version>1.0-beta-2</version>
             </extension>
         </extensions>
 
@@ -352,10 +353,16 @@
     
     <distributionManagement>
         <repository>
-            <id>prime-repo</id>
-            <name>PrimeFaces Maven Repository</name>
-            <url>sftp://primefaces.org/var/www/repository</url>
-        </repository>
+		<id>taylor-maven2-repository</id>
+		<name>Taylor Maven2 Repository</name>
+		<url>sftp://web.sourceforge.net/home/project-web/taylor/htdocs/maven2</url>
+	</repository>   
+	<snapshotRepository>
+		<id>taylor-maven2-snapshot-repository</id>
+		<name>Taylor Maven2 Snapshot Repository</name>
+		<url>sftp://web.sourceforge.net/home/project-web/taylor/htdocs/maven2</url>
+		<uniqueVersion>false</uniqueVersion>
+	</snapshotRepository>
     </distributionManagement>
 
     <reporting>
@@ -601,5 +608,15 @@
                 </plugins>
             </build>
         </profile>
+        <profile>
+		<id>mvn3</id>
+		<!--profile used to switch settings that enable the build to run under mvn3-->
+		<activation>
+			<activeByDefault>false</activeByDefault>
+		</activation>
+		<properties>
+			<wagon.ssh.version>2.4</wagon.ssh.version>
+		</properties>
+	</profile>
     </profiles>
 </project>
