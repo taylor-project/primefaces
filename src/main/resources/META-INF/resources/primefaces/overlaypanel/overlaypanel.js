@@ -23,7 +23,7 @@ PrimeFaces.widget.OverlayPanel = PrimeFaces.widget.BaseWidget.extend({
 
         this.bindEvents();
 
-        if(!(this.cfg.appendToBody == "false")) {
+        if(this.cfg.appendToBody) {
             this.jq.appendTo(document.body);
         }
 
@@ -217,7 +217,7 @@ PrimeFaces.widget.OverlayPanel = PrimeFaces.widget.BaseWidget.extend({
             this.jq.css('position', 'fixed');
 
             //append to body if not already appended by user choice
-            if(this.cfg.appendToBody == "false") {
+            if(!this.cfg.appendToBody) {
                 this.jq.appendTo(document.body);
             }
         }
